@@ -1,0 +1,7 @@
+security:
+  ignored:
+    - "*.bundle.*"
+  jwt: 
+    token-validity-in-seconds: 6060
+  
+

@@ -1,0 +1,11 @@
+<h1>Professor</h1>
+<div [hidden]="!authenticated()">
+  <ul>
+    <li *ngFor="let profe of professors">
+      <span>{{profe.nom}}</span> {{profe.cognom}}
+    </li>
+  </ul>
+</div>
+<div [hidden]="authenticated()">
+  <p>Login to see your professor</p>
+</div>
