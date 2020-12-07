@@ -1,7 +1,6 @@
 package com.quim.angularTest.configuaration.auth;
 
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.quim.angularTest.professor.Professor;
@@ -54,76 +53,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   @Override
   public Authentication attemptAuthentication(HttpServletRequest req,
                                               HttpServletResponse res) throws AuthenticationException {
-
-
-      /*String login = req.get("login");
-      String pss = req.getHeader("password");*/
-   /* StringBuilder stringBuilder = new StringBuilder();
-    BufferedReader bufferedReader = null;
-    try {
-      InputStream inputStream = req.getInputStream();
-      if (inputStream != null) {
-        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        char[] charBuffer = new char[128];
-        int bytesRead = -1;
-        while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-          stringBuilder.append(charBuffer, 0, bytesRead);
-        }
-      } else {
-        stringBuilder.append("");
-      }
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    } finally {
-      if (bufferedReader != null) {
-        try {
-          bufferedReader.close();
-        } catch (IOException ex) {
-          ex.printStackTrace();
-        }
-      }
-    }
-    //Store request pody content in 'body' variable
-    String body = stringBuilder.toString();
-    Gson g = new Gson();
-    //Professor professorG = g.fromJson(body, Professor.class);
-
-    JSONParser parser = new JSONParser();
-    String loginSimple="";
-    String passSimple="";
-    try {
-      JSONObject json = (JSONObject) parser.parse(body);
-      loginSimple = (String) json.get("login");
-      passSimple = (String) json.get("password");
-
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }*/
     ObjectMapper mapper = new ObjectMapper();
-    Professor person = null;
+    Professor professor = new Professor();
     try {
-      person = mapper.readValue(req.getInputStream(), Professor.class);
+      professor = mapper.readValue(req.getInputStream(), Professor.class);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-
-
-
-
-
-    /*try {
-      creds = new ObjectMapper()
-        .readValue(req.getInputStream(),
-          Professor.class);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }*/
-
     return authenticationManager.authenticate(
       new UsernamePasswordAuthenticationToken(
-        person.getLogin(),
-        person.getPassword(),
+        professor.getLogin(),
+        professor.getPassword(),
         new ArrayList<>())
     );
 
@@ -134,13 +74,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                           HttpServletResponse res,
                                           FilterChain chain,
                                           Authentication auth) throws IOException {
-
     String token = tokenProvider.generateToken(auth);
-
     String header = "Bearer " + token;
-
     res.addHeader(HttpHeaders.AUTHORIZATION, header);
-    //res.getWriter().write(body);
-    //res.getWriter().flush();
+
   }
 }
