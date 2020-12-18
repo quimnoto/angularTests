@@ -2,13 +2,10 @@ package com.quim.angularTest.configuaration.auth;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.quim.angularTest.professor.Professor;
 
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,10 +36,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   private final TokenProvider tokenProvider;
   private AuthenticationManager authenticationManager;
 
-  /*@Autowired
-  public JwtAuthenticationFilter(TokenProvider tokenProvider) {
-    this.tokenProvider = tokenProvider;
-  }*/
+
   @Autowired
   public JwtAuthenticationFilter(AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
     this.authenticationManager = authenticationManager;

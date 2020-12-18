@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
 import { HttpClient } from '@angular/common/http';
 import { IProfessor} from '../model/profesor';
+import { ProfessorService } from '../services/professor.service';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +13,15 @@ export class HomeComponent implements OnInit {
   professor:IProfessor;
   professors: IProfessor[];
 
-  constructor(private app: AppService, private http: HttpClient) {
-      http.get('professor').subscribe((data: IProfessor[]) => this.professors = data);
+  constructor(private profService: ProfessorService) {      
+    
   }
 
   ngOnInit(): void {
+    this.profService.getPofessors().subscribe((data: IProfessor[]) => this.professors = data);
   }
 
-  authenticated() {
-    return this.app.authenticated;
-  }
+  
 
 }
 

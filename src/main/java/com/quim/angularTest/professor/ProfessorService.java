@@ -16,16 +16,11 @@ import java.util.UUID;
 public class ProfessorService {
 
   private final ProfessorRepository professorRepository;
-  private final AuthenticationManager authenticationManager;
-  private final TokenProvider tokenProvider;
-  private final PasswordEncoder passwordEncoder;
+
 
 
   public ProfessorService(ProfessorRepository professorRepository, AuthenticationManager authenticationManager, TokenProvider tokenProvider, PasswordEncoder passwordEncoder){
     this.professorRepository =  professorRepository;
-    this.authenticationManager = authenticationManager;
-    this.tokenProvider = tokenProvider;
-    this.passwordEncoder = passwordEncoder;
   }
 
   public Professor primerProfessor() {
@@ -48,9 +43,9 @@ public class ProfessorService {
     professorRepository.deleteById(id);
   }
 
-  public String authenticateUserAndGetToken(String login, String password) {
+ /*public String authenticateUserAndGetToken(String login, String password) {
     final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
     SecurityContextHolder.getContext().setAuthentication(authentication);
     return tokenProvider.generateToken(authentication);
-  }
+  }*/
 }

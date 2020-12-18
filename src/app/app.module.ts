@@ -3,15 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { AppService } from './app.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { Injectable } from '@angular/core';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { AlumnesComponent } from './alumnes/alumnes.component';
 
 
 
@@ -31,7 +32,8 @@ export class XhrInterceptor implements HttpInterceptor {
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AlumnesComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +41,7 @@ export class XhrInterceptor implements HttpInterceptor {
     FormsModule,
     AppRoutingModule
   ],
-  providers: [
-    AppService,
-    {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}
-  ],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
