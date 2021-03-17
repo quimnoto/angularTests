@@ -142,7 +142,7 @@ public class ExcelHelper {
             case 27:
               String curs = currentCell.getStringCellValue();
 
-              alumne.setCurs(transformarCurs(curs));
+              alumne.setCurs(curs);
               break;
             case 28:
               alumne.setRalc(currentCell.getStringCellValue());
